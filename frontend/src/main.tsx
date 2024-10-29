@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 
+import Index from './routes/index'
+import Upload from './routes/upload'
+import File from './routes/file'
 import RootLayout from './layouts/root-layout'
-import Index from './routes'
-import Upload from './routes'
-import File from './routes'
 
 const router = createBrowserRouter([
   {
@@ -14,13 +14,8 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Index /> },
       { path: '/upload', element: <Upload /> },
-      {
-        path: 'folder',
-        children: [
-          { path: '/folder/my-files', element: <File owner={true} /> },
-          { path: '/folder/shared-files', element: <File owner={false} /> },
-        ],
-      },
+      { path: '/my-files', element: <File owner={true} /> },
+      { path: '/shared-files', element: <File owner={false} /> },
     ],
   },
 ])
