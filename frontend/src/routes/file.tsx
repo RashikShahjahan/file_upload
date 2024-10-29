@@ -1,20 +1,26 @@
+import { useAuth } from '@clerk/clerk-react';
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
 export default function File({ owner }: { owner: boolean }) {
   const [files, setFiles] = useState<File[]>([])
+  const { getToken } = useAuth();
 
   useEffect(() => {
     const getFiles = async () => {
-      const res = await axios.get(import.meta.env.VITE_FILES_URL)
+      const token = await getToken();
+      const res = await axios.get(import.meta.env.VITE_FILES_URL, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       setFiles(res.data.Contents)
     }
     getFiles()
   }, [])
   
   const downloadFile = async (key: string) => {
-      const res = await axios.get(import.meta.env.VITE_FILES_URL + '/' + key, {
-      responseType: 'blob',
+    const token = await getToken();
+    const res = await axios.get(import.meta.env.VITE_FILES_URL + '/' + key, {
+      headers: { Authorization: `Bearer ${token}` },
     })
     const url = window.URL.createObjectURL(new Blob([res.data]))
     const a = document.createElement('a')
