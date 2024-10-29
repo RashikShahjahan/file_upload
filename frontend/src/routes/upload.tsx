@@ -1,7 +1,10 @@
 import axios from 'axios'
+import { useAuth } from '@clerk/clerk-react';
 
 export default function Upload() {
-  const handleUpload = () => {
+  const { getToken } = useAuth();
+  const handleUpload = async () => {
+    const token = await getToken();
     const input = document.getElementById("input") as HTMLInputElement;
     if (!input) return;
     const file = input.files?.[0];
@@ -12,6 +15,7 @@ export default function Upload() {
 
     axios.post(import.meta.env.VITE_UPLOAD_URL, formData, {
       headers: {
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
       },
     })
