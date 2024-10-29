@@ -18,9 +18,7 @@ export default function RootLayout() {
     >
       <SignedIn>
         <UserButton />
-          <main>
-          <Outlet />
-        </main>
+        <Outlet />
       </SignedIn>
       <SignedOut>
         <SignInButton />

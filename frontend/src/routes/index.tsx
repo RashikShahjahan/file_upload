@@ -10,7 +10,10 @@ export default function Index() {
             <Link to="/upload">Upload</Link>
           </li>
           <li>
-            <Link to="/folder/">Folder</Link>
+            <Link to="/my-files">My Files</Link>
+          </li>
+          <li>
+            <Link to="/shared-files">Shared Files</Link>
           </li>
         </ul>
       </div>
